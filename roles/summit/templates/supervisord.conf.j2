@@ -1,5 +1,5 @@
 [program:summit]
-command={{ venv_dir }}/bin/python manage.py runserver localhost:80%(process_num)02d
+command={{ venv_dir }}/bin/python manage.py runserver localhost:80%(process_num)02d --settings=summit.olpcsf_settings
 process_name=summit%(process_num)02d
 autostart=true
 user=summit

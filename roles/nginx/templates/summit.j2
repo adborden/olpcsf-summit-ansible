@@ -1,0 +1,16 @@
+upstream django {
+        server localhost:8000;
+        server localhost:8001;
+}
+
+server {
+        listen 80 default_server;
+        listen [::]:80 default_server ipv6only=on;
+
+        server_name summit.olpcsf.org;
+
+        location / {
+                proxy_pass http://django;
+                #include /etc/nginx/uwsgi_params;
+        }
+}
