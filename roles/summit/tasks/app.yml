@@ -1,0 +1,37 @@
+---
+- name: Clone summit from launchpad
+  bzr: name=https://code.launchpad.net/~adborden/summit/olpcsf version=head dest="{{ app_dir }}"
+  sudo_user: "{{ user }}"
+
+- name: Clone olpcsf-theme from launchpad
+  bzr: name=https://code.launchpad.net/~adborden/ubuntu-community-webthemes/olpcsf-theme version=head dest="{{ app_dir }}/summit/olpcsf_website"
+  sudo_user: "{{ user }}"
+
+- name: Install local_settings.py
+  template: src=local_settings.py.j2 dest="{{ app_dir }}/summit/local_settings.py" owner={{ user }} group={{ user }} mode=0400
+
+- name: Setup virtualenv
+  command: virtualenv --system-site-packages --python=/usr/bin/python2.7 env
+  args:
+      chdir: "{{ app_dir }}"
+      creates: "{{ venv_dir }}"
+  sudo_user: "{{ user }}"
+
+  #TODO figure out why pip doesn't like lazr.authentication on ubuntu 14.04
+#- name: Install python dependencies
+#  pip: requirements="{{ app_dir }}/requirements.txt" virtualenv="{{ venv_dir }}" extra_args="--allow-external lazr.authentication --allow-unverified lazr.authentication" state=present
+#  sudo_user: "{{ user }}"
+
+- name: django syncdb
+  django_manage: command=syncdb settings=summit.olpcsf_settings virtualenv="{{ venv_dir }}" app_path="{{ app_dir }}/summit"
+  sudo_user: "{{ user }}"
+
+- name: django migrate
+  django_manage: command=migrate settings=summit.olpcsf_settings virtualenv="{{ venv_dir }}" app_path="{{ app_dir }}/summit"
+  sudo_user: "{{ user }}"
+
+- name: django init-summit
+  django_manage: command=init-summit settings=summit.olpcsf_settings virtualenv="{{ venv_dir }}" app_path="{{ app_dir }}/summit"
+  sudo_user: "{{ user }}"
+
+  #TODO add test to verify summit can run OK

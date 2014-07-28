@@ -1,0 +1,32 @@
+---
+
+- name: Install dependencies
+  apt: name={{ item }} state=present
+  with_items:
+    - bzr
+    - python2.7
+    #- python2.7-dev
+    - python-virtualenv
+    - libjs-jquery
+    - libjs-jquery-ui
+    - iso-codes
+    - python-django
+    - python-django-auth-openid
+    - python-django-south
+    - python-beautifulsoup
+    - python-psycopg2
+    - python-openid
+    - python-tz
+    - python-simplejson
+    - python-markdown
+
+- name: Create summit user
+  user: name=summit state=present
+
+- include: ./app.yml user=summit
+
+- name: Copy supervisord config
+  template: src=supervisord.conf.j2 dest=/etc/supervisor/conf.d/summit.conf owner=root group=root mode=0644
+
+- name: Start app
+  supervisorctl: name=summit state=present

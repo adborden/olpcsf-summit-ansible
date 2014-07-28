@@ -1,0 +1,7 @@
+[program:summit]
+command={{ venv_dir }}/bin/python manage.py runserver localhost:80%(process_num)02d
+process_name=summit%(process_num)02d
+autostart=true
+user=summit
+directory={{ app_dir }}/summit
+numprocs=2

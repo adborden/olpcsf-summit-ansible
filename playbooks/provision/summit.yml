@@ -1,0 +1,9 @@
+---
+
+- hosts: summit
+  sudo: yes
+  vars_files:
+    - ../../conf/secrets.yml
+  roles:
+    - common
+    - summit

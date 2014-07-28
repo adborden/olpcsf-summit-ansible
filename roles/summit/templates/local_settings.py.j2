@@ -1,0 +1,14 @@
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'summit',
+        'USER': 'summit',
+        'HOST': 'localhost',
+        'PASSWORD': '{{ db_password }}',
+        'PORT': '',
+    },
+}
+
+SECRET_KEY = '{{ secret_key }}'
+
+DEBUG = True

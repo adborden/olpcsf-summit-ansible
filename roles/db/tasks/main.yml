@@ -1,0 +1,13 @@
+---
+- name: Install dependencies
+  apt: name={{ item }} state=present
+  with_items:
+    - postgresql
+
+- name: Create summit role
+  postgresql_user: name=summit password={{ db_password }} state=present
+  sudo_user: postgres
+
+- name: Create summit db
+  postgresql_db: name=summit owner=summit encoding=UTF-8
+  sudo_user: postgres
