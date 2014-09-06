@@ -4,6 +4,7 @@
   with_items:
     - nginx
     - uwsgi
+    - uwsgi-plugin-python
 
 #TODO test nginx default site is working
 #

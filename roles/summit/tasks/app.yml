@@ -10,6 +10,9 @@
 - name: Install local_settings.py
   template: src=local_settings.py.j2 dest="{{ app_dir }}/summit/local_settings.py" owner={{ user }} group={{ user }} mode=0400
 
+- name: Copy wsgi
+  copy: src=olpcsf_wsgi.py dest="{{ app_dir }}/summit/olpcsf_wsgi.py" owner={{ user }} group={{ user }} mode=0644
+
 - name: Setup virtualenv
   command: virtualenv --system-site-packages --python=/usr/bin/python2.7 env
   args:
