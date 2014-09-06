@@ -9,6 +9,10 @@ server {
 
         server_name summit.olpcsf.org;
 
+        location /static/ {
+            root {{ app_home_dir }};
+        }
+
         location / {
                 proxy_pass http://django;
                 proxy_set_header Host $host;
