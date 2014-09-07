@@ -16,6 +16,8 @@
 
 - name: Copy app nginx site config
   template: src=summit.j2 dest=/etc/nginx/sites-available/summit owner=root group=root mode=0644
+  notify:
+    - restart nginx
 
 - name: Enable app nginx site config
   file: src=/etc/nginx/sites-available/summit dest=/etc/nginx/sites-enabled/summit state=link
