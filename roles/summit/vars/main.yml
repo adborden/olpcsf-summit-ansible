@@ -1,4 +1,5 @@
 ---
+user: "summit"
 home: "/home/summit"
 app_dir: "{{ home }}/app"
 venv_dir: "{{ app_dir }}/env"

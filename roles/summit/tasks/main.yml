@@ -1,5 +1,4 @@
 ---
-
 - name: Install dependencies
   apt: name={{ item }} state=present
   with_items:
@@ -26,15 +25,15 @@
 - include: ./app.yml user=summit
 
 - name: Copy uwsgi config
-  template: src=summit_uwsgi.ini.j2 dest=/etc/uwsgi/apps-available/summit.ini
+  template: src=uwsgi.ini.j2 dest=/etc/uwsgi/apps-available/summit.ini
 
 - name: Enable uwsgi config
-  file: src=/etc/uwsgi/apps-available/summit dest=/etc/uwsgi/apps-enabled/summit state=link
+  file: src=/etc/uwsgi/apps-available/summit.ini dest=/etc/uwsgi/apps-enabled/summit.ini state=link
   notify:
     - restart uwsgi
 
 - name: Copy supervisord config
-  template: src=supervisord.conf.j2 dest=/etc/supervisor/conf.d/summit.conf owner=root group=root mode=0644
+  template: src=supervisord_uwsgi.conf.j2 dest=/etc/supervisor/conf.d/summit.conf owner=root group=root mode=0644
   notify:
     - reload supervisord
     - restart uwsgi # Needed?
