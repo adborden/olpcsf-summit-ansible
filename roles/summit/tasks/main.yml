@@ -38,7 +38,7 @@
   template: src=supervisord_uwsgi.conf.j2 dest=/etc/supervisor/conf.d/summit.conf owner=root group=root mode=0644
   notify:
     - reload supervisord
-    - restart summit # Needed?
+    - restart summit
 
 - name: Start django app
   supervisorctl: name=summit state=started

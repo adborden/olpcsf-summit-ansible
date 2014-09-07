@@ -4,8 +4,9 @@ chdir = {{ app_dir }}
 module = summit.olpcsf_wsgi
 env = DJANGO_SETTINGS_MODULE=summit.olpcsf_settings
 master = true
-pidfile = /tmp/summit-master.pid
-socket = /tmp/uwsgi.sock
+pidfile = /tmp/summit.pid
+chmod-socket = 666
+socket = /tmp/summit.sock
 processes = 2
 harakiri = 20
 max-requests = 5000
