@@ -5,7 +5,7 @@ module = summit.olpcsf_wsgi
 env = DJANGO_SETTINGS_MODULE=summit.olpcsf_settings
 master = true
 pidfile = /tmp/summit.pid
-chmod-socket = 666
+chmod-socket = 664
 socket = /tmp/summit.sock
 processes = 2
 harakiri = 20
@@ -13,4 +13,4 @@ max-requests = 5000
 vacuum = true
 virtualenv = {{ venv_dir }}
 uid = {{ user }}
-gid = {{ user }}
+gid = www-data
