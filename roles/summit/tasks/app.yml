@@ -41,7 +41,7 @@
   sudo_user: "{{ user }}"
 
 - name: django collectstatic
-  django_manage: command=collectstatic  virtualenv="{{ venv_dir }}" app_path="{{ app_dir }}/summit"
+  django_manage: command=collectstatic settings=summit.olpcsf_settings virtualenv="{{ venv_dir }}" app_path="{{ app_dir }}/summit"
   sudo_user: "{{ user }}"
 
   #TODO add test to verify summit can run OK
