@@ -8,12 +8,12 @@ server {
 
         server_name summit.olpcsf.org;
 
-        location /media {
-            root {{ app_home_dir }}/media;
+        location /media/ {
+            alias {{ app_home_dir }}/media/;
         }
 
-        location /static {
-            root {{ app_home_dir }}/static;
+        location /static/ {
+            alias {{ app_home_dir }}/static/;
         }
 
         location / {
