@@ -1,2 +1,2 @@
 ---
-app_home_dir: "{{ home }}/app"
+app_home_dir: "/home/summit/app/summit"
